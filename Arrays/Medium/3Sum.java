@@ -6,7 +6,7 @@ class Solution {
         Arrays.sort(nums);
         
         //make a HashSet to store Unique pairs
-        Set<List<Integer>> result = new HashSet<>();
+        List<List<Integer>> result = new ArrayList<>();
 
         //Fix 1st element while finding other 2 elements
         for(int i=0 ; i<nums.length-2 ; i++){
@@ -15,12 +15,12 @@ class Solution {
             if( i > 0 && nums[i] == nums[i-1]) continue;
 
             //finding other 2 elements using 2Sum approach
-            int left = i+1 , right = nums.length-1;
+            int left = i+1 , right = nums.length-1 , sum = ( -1 ) * nums[i];
 
             while( left < right ){
-                int sum = nums[i] + nums[left] + nums[right];
+                int s = nums[left] + nums[right];
 
-                if( sum == 0 ){
+                if( s == sum ){
                     //Add to set and move to find other triplets
                     result.add(Arrays.asList( nums[i] , nums[left] , nums[right] ));
 
@@ -33,13 +33,13 @@ class Solution {
                     right--;
                 }
 
-                else if( sum < 0 ){
+                else if( s < sum ){
                     left++;
                 }
 
                 else right--;
             }
         }
-        return new ArrayList<>(result);
+        return result;
     }
 }
