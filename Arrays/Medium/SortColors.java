@@ -1,26 +1,28 @@
 class Solution {
     public void sortColors(int[] nums) {
-        int left = 0;
-        int right  = nums.length - 1;
-        int mid = 0;
 
-        while( mid <= right ) {
-            if( nums[mid] == 0 ) {
-                //swap left and mid , inc both 
-                int temp = nums[left];
-                nums[left] = nums[mid];
-                nums[mid] = temp;
+        int left = 0 , mid = 0 , right = nums.length-1;
+
+        while( mid <= right ){
+
+            if( nums[mid] == 0 ){
+                swap( nums , left , mid );
                 left++;
                 mid++;
-            } else if( nums[mid] == 1 ) {
+            }
+            else if( nums[mid] == 1 ){
                 mid++;
-            } else {
-                //swap right and mid  
-                int temp = nums[right];
-                nums[right] = nums[mid];
-                nums[mid] = temp;
+            }
+            else{
+                swap( nums , mid , right );
                 right--;
             }
         }
+    }
+
+    public void swap(int nums[], int a , int b){
+        int temp = nums[a];
+        nums[a] = nums[b];
+        nums[b] = temp;
     }
 }
