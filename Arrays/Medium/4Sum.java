@@ -15,7 +15,7 @@ class Solution {
                 int right = nums.length - 1;
 
                 while( left < right ) {
-                    int mid = left + ( right - left )/2;
+                    
                     long sum = (long) nums[i] + nums[j] + nums[left] + nums[right];
 
                     if( sum == target ) {
