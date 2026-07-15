@@ -1,43 +1,33 @@
 class Solution {
     public List<List<Integer>> threeSum(int[] nums) {
-        if( nums == null || nums.length < 3 ) return new ArrayList<>();
-
-        //Sort the array 
-        Arrays.sort(nums);
         
-        //make a HashSet to store Unique pairs
+         // using AL to store results
         List<List<Integer>> result = new ArrayList<>();
 
-        //Fix 1st element while finding other 2 elements
-        for(int i=0 ; i<nums.length-2 ; i++){
+        if( nums == null || nums.length < 3 ) return result;
 
-            //skip the duplicates
-            if( i > 0 && nums[i] == nums[i-1]) continue;
+        // sort the array
+        Arrays.sort(nums);
 
-            //finding other 2 elements using 2Sum approach
-            int left = i+1 , right = nums.length-1 , sum = ( -1 ) * nums[i];
-
+        for( int i=0 ; i<nums.length-2 ; i++){
+            if( i > 0 && nums[i] == nums[i-1] ) continue;
+            int left = i+1 , right = nums.length-1;
             while( left < right ){
-                int s = nums[left] + nums[right];
-
-                if( s == sum ){
-                    //Add to set and move to find other triplets
-                    result.add(Arrays.asList( nums[i] , nums[left] , nums[right] ));
-
-                    //skip duplicates for left
-                    while( left < right && nums[left] == nums[left+1]) left++;
-                    //skip duplicates for right
-                    while( left < right && nums[right] == nums[right-1]) right--;
-
+                int sum = nums[left] + nums[right];
+                if( sum == -nums[i] ){
+                    result.add(Arrays.asList(nums[i],nums[left],nums[right]));
                     left++;
                     right--;
-                }
 
-                else if( s < sum ){
+                    while( left < right && nums[left]==nums[left-1] ) left++;
+                    while( left < right && nums[right]==nums[right+1] ) right--;
+                }
+                else if( sum > -nums[i] ){
+                    right--;
+                }
+                else{
                     left++;
                 }
-
-                else right--;
             }
         }
         return result;
