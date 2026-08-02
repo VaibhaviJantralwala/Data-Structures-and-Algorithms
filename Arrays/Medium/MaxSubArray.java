@@ -1,30 +1,22 @@
 class Solution {
-    //O(n)
+    
     public int maxSubArray(int[] nums) {
-        //return maxSubArrayBF(nums);
+        
+        int bestEnding = nums[0];
+        int result = nums[0];
 
-        int curr = 0;
-        int max = nums[0];
-        for(int i=0 ; i<nums.length ; i++){
-            if(curr < 0){
-                curr = 0;
-            }
-            curr += nums[i];
-            max = Math.max(curr,max);
+        for( int i=1 ; i<nums.length ; i++){
+
+            int val1 = nums[i];
+            int val2 = bestEnding + nums[i];
+
+            bestEnding = Math.max( val1 , val2 );
+
+            result = Math.max( result , bestEnding );
         }
-        return max;
+
+        return result;
     }
 
-    //O(n2)
-    public int maxSubArrayBF(int[] nums) {
-        int maxSum = Integer.MIN_VALUE;
-        for(int i=0 ; i<nums.length ; i++){
-            int currSum = 0;
-            for(int j=i ; j<nums.length ; j++){
-                currSum +=nums[j];
-                maxSum = Math.max(currSum,maxSum);
-            }
-        }
-        return maxSum;
-    }
+    
 }
