@@ -1,20 +1,18 @@
 class Solution {
     public String makeGood(String s) {
         
-        Deque<Character> stk = new ArrayDeque<>();
+        StringBuilder sb = new StringBuilder();
 
         for( char ch : s.toCharArray() ){
-            if( !stk.isEmpty() && (Math.abs(stk.peek() - ch) == 32) ){
-                stk.pop();
+
+            int len = sb.length();
+
+            if( len > 0 && ( Math.abs( sb.charAt(len-1) - ch ) == 32 ) ){
+                sb.deleteCharAt(len-1);
             }else{
-                stk.push(ch);
+                sb.append(ch);
             }
         }
-
-        StringBuilder sb = new StringBuilder();
-        while( !stk.isEmpty()){
-            sb.append(stk.pop());
-        }
-        return sb.reverse().toString();
+        return sb.toString();
     }
 }
